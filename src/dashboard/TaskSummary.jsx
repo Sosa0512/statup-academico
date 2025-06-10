@@ -1,5 +1,3 @@
-import TaskSummary from './TaskSummary';
-
 function TaskSummary({ tasks }) {
     const total = tasks.length;
     const completadas = tasks.filter(t => t.status === 'completada').length;

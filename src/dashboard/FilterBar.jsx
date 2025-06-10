@@ -1,5 +1,3 @@
-import FilterBar from './FilterBar';
-
 function FilterBar({ filter, setFilter }) {
     return (
         <div className="filter-bar">
