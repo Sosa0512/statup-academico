@@ -6,7 +6,10 @@ function FilterBar({ filter, setFilter }) {
                 value={filter.subject}
                 onChange={e => setFilter({ ...filter, subject: e.target.value })}
             />
-            <select value={filter.status} onChange={e => setFilter({ ...filter, status: e.target.value })}>
+            <select
+                value={filter.status}
+                onChange={e => setFilter({ ...filter, status: e.target.value })}
+            >
                 <option value="">Todos</option>
                 <option value="pendiente">Pendientes</option>
                 <option value="completada">Completadas</option>
@@ -16,3 +19,4 @@ function FilterBar({ filter, setFilter }) {
 }
 
 export default FilterBar;
+

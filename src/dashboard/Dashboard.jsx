@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Dashboard.css';
 import FilterBar from './FilterBar';
 import TaskForm from './TaskForm';
 import TaskList from './TaskList';
@@ -56,10 +57,19 @@ function Dashboard() {
         fetchTasks();
     };
 
+    useEffect(() => {
+        if (!user) {
+            navigate('/');
+        }
+    }, []);
+
     return (
-        <div>
-            <h1>Panel de Tareas</h1>
-            <button onClick={handleLogout}>Cerrar sesión</button>
+        <div className="dashboard-container">
+            <div className="dashboard-header">
+                <h1>Panel de Tareas</h1>
+                <button onClick={handleLogout}>Cerrar sesión</button>
+            </div>
+
             <FilterBar filter={filter} setFilter={setFilter} />
             <TaskForm editing={editing} onRefresh={refreshTasks} />
             <TaskSummary tasks={filteredTasks} />

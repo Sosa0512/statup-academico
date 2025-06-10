@@ -78,3 +78,68 @@ button:hover {
 .auth-switch a:hover {
   text-decoration: underline;
 }
+
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  flex: 1;
+  max-width: 250px;
+}
+
+.task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.task-card {
+  background-color: #ffffffd9;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+.task-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.task-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.task-card button {
+  margin-top: 0.6rem;
+  margin-right: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.task-card button:hover {
+  background-color: #0056b3;
+}
