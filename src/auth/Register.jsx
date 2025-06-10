@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../services/api";
 
-export default function Register() {
+function Register() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -17,11 +16,26 @@ export default function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setError("");
+
         try {
-            const user = await registerUser(formData);
-            localStorage.setItem("user", JSON.stringify(user));
-            navigate("/dashboard");
+            const response = await fetch("http://localhost:3000/usuarios", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                localStorage.setItem("user", JSON.stringify(user));
+                navigate("/dashboard");
+            } else {
+                throw new Error("Error al registrar");
+            }
         } catch (err) {
+            console.error(err);
             setError("Error al registrar. Intenta de nuevo.");
         }
     };
@@ -60,3 +74,5 @@ export default function Register() {
         </div>
     );
 }
+
+export default Register;
