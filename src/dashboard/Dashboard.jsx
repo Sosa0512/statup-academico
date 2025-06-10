@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { tasks as taskData } from '../services/database';
 import './Dashboard.css';
 import FilterBar from './FilterBar';
 import TaskForm from './TaskForm';
@@ -13,15 +14,15 @@ function Dashboard() {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
-    const fetchTasks = async () => {
-        const res = await fetch(`http://localhost:3000/tasks?userId=${user.id}`);
-        const data = await res.json();
-        setTasks(data);
-    };
-
     useEffect(() => {
-        fetchTasks();
-    }, []);
+        if (!user) {
+            navigate('/');
+        } else {
+            // Simula fetch: filtra solo las tareas del usuario actual
+            const userTasks = taskData.filter(t => t.userId === user.id);
+            setTasks(userTasks);
+        }
+    }, [user]);
 
     const filteredTasks = tasks.filter(task => {
         const matchSubject = task.subject.toLowerCase().includes(filter.subject.toLowerCase());
@@ -34,18 +35,20 @@ function Dashboard() {
         navigate('/');
     };
 
-    const handleComplete = async (id) => {
-        await fetch(`http://localhost:3000/tasks/${id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: 'completada' })
-        });
-        fetchTasks();
+    const handleComplete = (id) => {
+        const index = taskData.findIndex(t => t.id === id);
+        if (index !== -1) {
+            taskData[index].status = 'completada';
+            refreshTasks();
+        }
     };
 
-    const handleDelete = async (id) => {
-        await fetch(`http://localhost:3000/tasks/${id}`, { method: 'DELETE' });
-        fetchTasks();
+    const handleDelete = (id) => {
+        const index = taskData.findIndex(t => t.id === id);
+        if (index !== -1) {
+            taskData.splice(index, 1);
+            refreshTasks();
+        }
     };
 
     const handleEdit = (task) => {
@@ -53,15 +56,10 @@ function Dashboard() {
     };
 
     const refreshTasks = () => {
+        const userTasks = taskData.filter(t => t.userId === user.id);
+        setTasks(userTasks);
         setEditing(null);
-        fetchTasks();
     };
-
-    useEffect(() => {
-        if (!user) {
-            navigate('/');
-        }
-    }, []);
 
     return (
         <div className="dashboard-container">
