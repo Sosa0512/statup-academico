@@ -69,8 +69,11 @@ function Register() {
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Registrarse</button>
             </form>
+            <p>¿Ya tienes cuenta?</p>
+            <button onClick={() => navigate('/')}>Inicia sesión</button>
         </div>
     );
 }
 
 export default Register;
+
