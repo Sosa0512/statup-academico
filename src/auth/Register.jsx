@@ -20,11 +20,7 @@ function Register() {
                 return;
             }
 
-            const nuevoUsuario = {
-                nombre,
-                usuario,
-                contrasena
-            };
+            const nuevoUsuario = { nombre, usuario, contrasena };
 
             const createRes = await fetch('http://localhost:3000/usuarios', {
                 method: 'POST',
@@ -34,7 +30,8 @@ function Register() {
 
             const createdUser = await createRes.json();
 
-            localStorage.setItem('user', JSON.stringify(createdUser));
+            localStorage.setItem('usuarioActual', JSON.stringify(createdUser));
+            alert("Registro exitoso. Bienvenido a la plataforma.");
             navigate('/dashboard');
         } catch (err) {
             setError('Error al conectar con el servidor');
@@ -76,4 +73,3 @@ function Register() {
 }
 
 export default Register;
-

@@ -15,7 +15,7 @@ function Login() {
             const data = await res.json();
 
             if (data.length > 0) {
-                localStorage.setItem('user', JSON.stringify(data[0]));
+                localStorage.setItem('usuarioActual', JSON.stringify(data[0]));
                 navigate('/dashboard');
             } else {
                 setError('Credenciales inválidas');

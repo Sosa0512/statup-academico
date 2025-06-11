@@ -19,8 +19,8 @@ function TaskForm({ editing, onRefresh }) {
         const task = { title, subject, dueDate, status: 'pendiente', userId: user.id };
 
         const url = editing
-            ? `http://localhost:3000/tasks/${editing.id}`
-            : 'http://localhost:3000/tasks';
+            ? `http://localhost:3000/tareas/${editing.id}`
+            : 'http://localhost:3000/tareas';
         const method = editing ? 'PUT' : 'POST';
 
         await fetch(url, {

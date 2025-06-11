@@ -11,7 +11,7 @@ function Dashboard() {
     const [filter, setFilter] = useState({ subject: '', status: '' });
     const [editing, setEditing] = useState(null);
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('usuarioActual')); // corregido
 
     const fetchTasks = async () => {
         const res = await fetch(`http://localhost:3000/tareas?userId=${user.id}`);
@@ -34,7 +34,7 @@ function Dashboard() {
     });
 
     const handleLogout = () => {
-        localStorage.removeItem('user');
+        localStorage.removeItem('usuarioActual'); // corregido
         navigate('/');
     };
 
