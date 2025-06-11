@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { agregarUsuario, usuarios } from '../services/api.js';
 
 function Register() {
     const [nombre, setNombre] = useState('');
@@ -9,31 +8,43 @@ function Register() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
 
-        const existe = usuarios.some(u => u.usuario === usuario);
-        if (existe) {
-            setError('El nombre de usuario ya está en uso.');
-            return;
+        try {
+            const res = await fetch(`http://localhost:3000/usuarios?usuario=${usuario}`);
+            const data = await res.json();
+
+            if (data.length > 0) {
+                setError('El usuario ya existe');
+                return;
+            }
+
+            const nuevoUsuario = {
+                nombre,
+                usuario,
+                contrasena
+            };
+
+            const createRes = await fetch('http://localhost:3000/usuarios', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(nuevoUsuario)
+            });
+
+            const createdUser = await createRes.json();
+
+            localStorage.setItem('user', JSON.stringify(createdUser));
+            navigate('/dashboard');
+        } catch (err) {
+            setError('Error al conectar con el servidor');
         }
-
-        const nuevoUsuario = {
-            id: crypto.randomUUID(),
-            nombre,
-            usuario,
-            contrasena
-        };
-
-        agregarUsuario(nuevoUsuario);
-        localStorage.setItem('user', JSON.stringify(nuevoUsuario));
-        navigate('/dashboard');
     };
 
     return (
         <div className="register-container">
-            <h2>Registrarse</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>Registro</h2>
+            <form onSubmit={handleRegister}>
                 <input
                     type="text"
                     placeholder="Nombre completo"
@@ -43,7 +54,7 @@ function Register() {
                 />
                 <input
                     type="text"
-                    placeholder="Nombre de usuario"
+                    placeholder="Usuario"
                     value={usuario}
                     onChange={(e) => setUsuario(e.target.value)}
                     required

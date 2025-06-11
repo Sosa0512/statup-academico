@@ -1,15 +1,15 @@
 export let usuarios = [
     {
         id: '1',
-        nombre: 'Jaime Zapata',
+        nombre: 'Samuel Torres',
         usuario: 'admin',
         contrasena: 'admin'
     },
     {
         id: '2',
-        nombre: 'Camila Perez',
-        usuario: 'camila',
-        contrasena: 'camila'
+        nombre: 'Sofia Perez',
+        usuario: 'sofia',
+        contrasena: 'sofia'
     }
 ];
 
