@@ -1,4 +1,4 @@
-function TaskSummary({ tasks }) {
+function TaskSummary({ tasks = [] }) {
     const total = tasks.length;
     const completadas = tasks.filter(t => t.status === 'completada').length;
     const pendientes = tasks.filter(t => t.status === 'pendiente').length;

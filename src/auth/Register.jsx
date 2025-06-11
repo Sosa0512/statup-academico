@@ -30,7 +30,6 @@ function Register() {
 
             const createdUser = await createRes.json();
 
-            localStorage.setItem('usuarioActual', JSON.stringify(createdUser));
             alert("Registro exitoso. Bienvenido a la plataforma.");
             navigate('/dashboard');
         } catch (err) {
@@ -41,7 +40,7 @@ function Register() {
     return (
         <div className="register-container">
             <h2>Registro</h2>
-            <form onSubmit={handleRegister}>
+            <form onSubmit={handleRegister} className="form">
                 <input
                     type="text"
                     placeholder="Nombre completo"
@@ -66,8 +65,24 @@ function Register() {
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Registrarse</button>
             </form>
-            <p>¿Ya tienes cuenta?</p>
-            <button onClick={() => navigate('/')}>Inicia sesión</button>
+
+            <p className="auth-switch">
+                ¿Ya tienes cuenta?{' '}
+                <button
+                    onClick={() => navigate('/')}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#007bff',
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                        padding: 0,
+                        fontSize: '1rem'
+                    }}
+                >
+                    Inicia sesión
+                </button>
+            </p>
         </div>
     );
 }

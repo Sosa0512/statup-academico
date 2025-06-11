@@ -19,4 +19,3 @@ function FilterBar({ filter, setFilter }) {
 }
 
 export default FilterBar;
-

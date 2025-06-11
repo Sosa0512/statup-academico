@@ -9,13 +9,16 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setError('');
 
         try {
             const res = await fetch(`http://localhost:3000/usuarios?usuario=${usuario}&contrasena=${contrasena}`);
+            if (!res.ok) throw new Error('Servidor no disponible');
+
             const data = await res.json();
 
             if (data.length > 0) {
-                localStorage.setItem('usuarioActual', JSON.stringify(data[0]));
+                localStorage.setItem('user', JSON.stringify(data[0]));
                 navigate('/dashboard');
             } else {
                 setError('Credenciales inválidas');
@@ -27,7 +30,7 @@ function Login() {
 
     return (
         <div className="login-container">
-            <h2>Iniciar Sesión</h2>
+            <h2>Iniciar sesión</h2>
             <form onSubmit={handleLogin}>
                 <input
                     type="text"
@@ -46,10 +49,7 @@ function Login() {
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Entrar</button>
             </form>
-
-            {/* 🔽 Agregado: botón de registro */}
-            <div className="auth-switch">
-                ¿No tienes una cuenta?{' '}
+            <p>¿No tienes cuenta?{' '}
                 <button
                     onClick={() => navigate('/register')}
                     style={{
@@ -57,17 +57,14 @@ function Login() {
                         border: 'none',
                         color: '#007bff',
                         textDecoration: 'underline',
-                        cursor: 'pointer',
-                        padding: 0,
-                        fontSize: '1rem'
+                        cursor: 'pointer'
                     }}
                 >
                     Regístrate
                 </button>
-            </div>
+            </p>
         </div>
     );
 }
 
 export default Login;
-

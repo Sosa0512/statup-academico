@@ -1,1 +1,74 @@
-{}
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Juan Pérez",
+      "usuario": "juan",
+      "contrasena": "1234"
+    },
+    {
+      "id": "2",
+      "nombre": "Ana Gómez",
+      "usuario": "ana",
+      "contrasena": "abcd"
+    },
+    {
+      "id": "3",
+      "nombre": "Luis Fernández",
+      "usuario": "luis",
+      "contrasena": "5678"
+    },
+    {
+      "id": "4e3f",
+      "nombre": "Alejandro Suarez",
+      "usuario": "alejo",
+      "contrasena": "3457"
+    },
+    {
+      "id": "0bfe",
+      "nombre": "Jose Luis Torres",
+      "usuario": "luitorres",
+      "contrasena": "2345"
+    },
+    {
+      "id": "6a34",
+      "nombre": "Jorge Taborda",
+      "usuario": "taborda",
+      "contrasena": "1245"
+    }
+  ],
+  "tareas": [
+    {
+      "id": "1",
+      "userId": 1,
+      "title": "Resolver integrales",
+      "subject": "Matemáticas",
+      "dueDate": "2025-06-12",
+      "status": "pendiente"
+    },
+    {
+      "id": "2",
+      "userId": 1,
+      "title": "Leer capítulo 3",
+      "subject": "Historia",
+      "dueDate": "2025-06-13",
+      "status": "completada"
+    },
+    {
+      "id": "3",
+      "userId": 2,
+      "title": "Practicar vocabulario",
+      "subject": "Inglés",
+      "dueDate": "2025-06-14",
+      "status": "pendiente"
+    },
+    {
+      "title": "Estudios del mapa del mundo",
+      "subject": "Geografía",
+      "dueDate": "2025-06-27",
+      "status": "pendiente",
+      "userId": "4e3f",
+      "id": "1200"
+    }
+  ]
+}
